@@ -1,0 +1,141 @@
+<div class = "header_content">
+  <h1 class = "title">G20 Booking</h1>
+  <ul class = "list_menu">
+    <li><a routerLink="/promotion" routerLinkActive="active">Add Promotion</a></li>
+    <li class = "active"><a routerLink="/view-promotion" routerLinkActive="active">Manage Promotion</a></li>
+    <li><a routerLink="/" routerLinkActive="active">Log Out</a></li>
+  </ul>
+</div>
+<br>
+<br>
+<div>
+  <mat-drawer-container class="example-container">
+
+  <table mat-table [dataSource]="promotions" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="no">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element ; let i = index">{{i+1}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="hotelName">
+      <th mat-header-cell *matHeaderCellDef> Hotel Name </th>
+      <td mat-cell *matCellDef="let element">{{element.hotelEntity.hotelNameEng}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="roomType">
+      <th mat-header-cell *matHeaderCellDef> Room Type </th>
+      <td mat-cell *matCellDef="let element">{{element.roomTypeEntity.roomType}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="promotionType">
+      <th mat-header-cell *matHeaderCellDef> Promotion Type </th>
+      <td mat-cell *matCellDef="let element">{{element.promotionTypeEntity.promotionType}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="detail">
+      <th mat-header-cell *matHeaderCellDef> Detail </th>
+      <td mat-cell *matCellDef="let element">{{element.detail}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="dateStart">
+      <th mat-header-cell *matHeaderCellDef> Date Start </th>
+      <td mat-cell *matCellDef="let element">{{element.dateStart}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="dateEnd">
+      <th mat-header-cell *matHeaderCellDef> Date End </th>
+      <td mat-cell *matCellDef="let element">{{element.dateEnd}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+        (click)="selectRow(row)">
+    </tr>
+  </table>
+  </mat-drawer-container>
+</div>
+<br>
+<br>
+<div class = "main_content">
+  <br>
+  <h1><a>ข้อมูล Promotion</a></h1>
+  <br>
+  <div class = "zzz"></div>
+  <div class = "main_content_left">
+    <br>
+    <h2 class = "label">ชื่อโรงแรม</h2>
+    <mat-form-field class="select_item">
+      <input matInput placeholder="Hotel Name" [(ngModel)]="updatePromotion.hotelSelect" [disabled]='true'>
+    </mat-form-field>
+    <br>
+    <br>
+    <br>
+    <h2 class = "label">ประเภทห้องพัก</h2>
+    <mat-form-field class="select_item">
+      <input matInput placeholder="Room Type" [(ngModel)]="updatePromotion.roomTypeSelect" [disabled]='true'>
+    </mat-form-field>
+    <br>
+    <br>
+    <br>
+    <h2 class = "label">ประเภทของโปรโมชั่น</h2>
+    <mat-form-field class="select_item">
+      <input matInput placeholder="Promotion Type" [(ngModel)]="updatePromotion.promotionTpyeSelect" [disabled]='true'>
+    </mat-form-field>
+    <br>
+    <br>
+    <br>
+    <h2 class = "label">%ที่ลดราคา</h2>
+    <mat-form-field class="discount_input">
+      <input matInput placeholder="Discount" [(ngModel)]="updatePromotion.discountInput">
+    </mat-form-field>
+  </div>
+  <div class = "main_content_mid">
+
+  </div>
+  <div class = "main_content_right">
+    <br>
+    <h2 class = "label">วันที่เริ่มโปรโมชั่น</h2>
+    <mat-form-field class="calender">
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="updatePromotion.dateStartInput">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker></mat-datepicker>
+    </mat-form-field>
+    <br>
+    <br>
+    <h2 class = "label_edit">วันที่สิ้นสุดโปรโมชั่น</h2>
+    <mat-form-field class="calender">
+      <input matInput [matDatepicker]="picker2" placeholder="Choose a date" [(ngModel)]="updatePromotion.dateEndInput">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker2></mat-datepicker>
+    </mat-form-field>
+    <br>
+    <br>
+    <h2 class = "label_edit">รายละเอียดโปรโมชั่น</h2>
+    <br>
+    <mat-form-field class = "detail_text">
+      <textarea matInput [(ngModel)]="updatePromotion.detailInput" rows="4" cols="50"></textarea>
+    </mat-form-field>
+    <br>
+    <br>
+    <button mat-button class = "add_button" (click)="update()"><b class = "text_in_button">Update Promotion</b></button>
+    <button mat-button class = "add_button" (click)="delete()"><b class = "text_in_button">Delete Promotion</b></button>
+  </div>
+  <div class = "zzz"></div>
+</div>
+

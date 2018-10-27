@@ -1,0 +1,79 @@
+<div class = "header_content">
+  <h1 class = "title">G20 Booking</h1>
+  <mat-icon matSuffix>payment</mat-icon>
+  <ul class = "list_menu">
+    <li class = "active"><a>Payment</a></li>
+    <li (click)="goReview()"><a>Review</a></li>
+    <li [routerLink]="['']"><a>Log Out</a></li>
+    
+  </ul>
+</div>
+<br>
+<div class = "main_content">
+  <br>
+  <h1><a>กรอกข้อมูลการชำระเงิน :</a></h1>
+
+  <mat-grid-list cols="2" rowHeight="400px" >
+    <mat-grid-tile class="example-form">
+        <form class="example-form">
+          <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Firstname</mat-label>
+              <input matInput [(ngModel)] = "pay.firstname" name="firstname" >
+              <mat-icon matSuffix>face</mat-icon>
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Lastname</mat-label>
+              <input matInput [(ngModel)] = "pay.lastname" name="lastname">
+              <mat-icon matSuffix>face</mat-icon>
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Accountnumber</mat-label>
+              <input matInput [(ngModel)] = "pay.accountnumber" name="accountnumber"  >
+              <mat-icon matSuffix>account_balance</mat-icon>
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Phonenum</mat-label>
+              <input matInput [(ngModel)] = "pay.phonenum" name="phonenum" >
+              <mat-icon matSuffix>account_balance</mat-icon>
+          </mat-form-field>
+        </form>
+    </mat-grid-tile>
+    <mat-grid-tile class="example-formright">
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+                <mat-select placeholder="Select Reservation" [(ngModel)]="pay.reservation" name="reservationsId">
+                    <mat-option>None </mat-option>
+                    <mat-option *ngFor="let reservation of reservations" [value]="reservation.reservationsId" >รายการจองที {{reservation.reservationsId}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Address</mat-label>
+              <textarea matInput [(ngModel)]="pay.address" name = "address"></textarea>
+              <mat-icon matSuffix>home</mat-icon>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="example-full-width">
+                <mat-select placeholder="Select Typepayment" [(ngModel)] = "pay.typepayment" name="typename">
+                    <mat-option>None </mat-option>
+                    <mat-option *ngFor="let type of typepayments " [value]="type.typename" >{{type.typename}}</mat-option>
+                  </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="example-full-width">
+                <mat-select placeholder="Select Bank" [(ngModel)]="pay.bank" name="bankname">
+                    <mat-option>None </mat-option>
+                    <mat-option *ngFor="let bank of banks" [value]="bank.bankname" >{{bank.bankname}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div class="button-row">
+                <button mat-raised-button (click)="save()" color="primary">Confirm payment</button>
+              </div>
+          </form>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+  <div class="button-row">
+  </div>
+</div>
+
+

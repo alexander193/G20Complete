@@ -1,0 +1,98 @@
+*{
+      padding: 0px;
+      margin:  0px;
+}
+#prach1{
+      width: 100%;
+      height: 70px;
+      line-height: 70px;
+      background: #00BFFF;
+
+}
+#prach1 h1 a{
+      color: white;
+      front-size: 2.5px;
+      margin-left: 15px;
+}
+#prach1 h1{
+      float: left;
+}
+
+#prach1 ul{
+      float: right;
+      margin-right: 15px;
+}
+#prach1 ul li{
+      display: inline-block;
+      list-style-type: none;
+}
+#prach1 ul li a{
+      text-decoration: non;
+      color:  white;
+      padding: 20px;
+}
+
+#headline{
+  text-align: center;
+}
+#mainprach{
+
+      height: 500px;
+      background-color: #87CEFF;
+}
+#selectHotel {
+   text-align: center;
+}
+#selectRoomtype{
+  text-align: center;
+}
+#selectPromotion {
+   text-align: center;
+}
+#selectPeopleAndRoom{
+    text-align: center;
+}
+#selectDate{
+    text-align: center;
+}
+#button1{
+    text-align: center;
+}
+.header_content{
+      width: 100%;
+      height: 70px;
+      line-height: 70px;
+      background-color: rgb(16, 107, 211);
+      color:white;
+  }
+
+  .title{
+      float: left;
+      margin-left:17px;
+  }
+  .list_menu{
+      float: right;
+  }
+  .list_menu li{
+      display: inline-block;
+      list-style-type: none;
+      margin-left: 15px;
+  }
+  .list_menu li a{
+      text-decoration: none;
+      padding:5px 20px;
+      font-family:"Roboto",sans-serif;
+      font-size: 20px;
+      color:white;
+  }
+  .list_menu li.active a{
+      background: #2F88EE;
+      transition: all ease-in-out 0.45;
+      border: 5px solid white;
+      color:white;
+  }
+  .list_menu li a:hover{
+      background: #2F88EE;
+      border: 5px solid white;
+      color:white;
+  }

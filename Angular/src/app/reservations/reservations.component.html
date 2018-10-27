@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>G20 PROJECT</title>
+</head>
+<body>
+  <div class = "header_content">
+    <h1 class = "title">G20 Booking</h1>
+    <ul class = "list_menu">
+      <li class = "active"><a routerLink="/promotion" routerLinkActive="active">Reservation</a></li>
+      <li><a (click) = "goPaymant()" routerLinkActive="active">Payment</a></li>
+      <li><a (click) = "goReview()" routerLinkActive="active">Payment</a></li>
+      <li><a routerLink="/" routerLinkActive="active">Log Out</a></li>
+    </ul>
+  </div>
+  <br>
+<h1 id="headline">ระบบจองห้องพักโรงแรม</h1>
+<div id="mainprach">
+ <div id="selectHotel">
+
+    โปรดเลือกโรงแรม
+
+    <mat-form-field>
+      <mat-select placeholder="เลือกโรงแรม" [(ngModel)]="views.hotelSelect" name = "hotelType">
+        <mat-option *ngFor="let hotel of hotel" [value]="hotel.hotelNameEng">
+          {{hotel.hotelNameEng}}
+        </mat-option>
+      </mat-select>
+
+    </mat-form-field>
+
+  </div>
+
+  <div id="selectRoomtype">
+
+    โปรดเลือกประเภทห้องพัก
+
+    <mat-form-field>
+      <mat-select placeholder="เลือกประเภทห้อง" [(ngModel)]="views.roomTypeSelect" name = "roomType" (click)="update_type()">
+        <mat-option *ngFor="let roomtype of roomTypes " [value]="roomtype.roomType">
+          {{roomtype.roomType}}
+        </mat-option>
+      </mat-select>
+
+    </mat-form-field>
+
+  </div>
+
+  <div id="selectPromotion">
+    โปรเลือกโปรโมชั่น
+    <mat-form-field>
+      <mat-select placeholder="เลือกโปรโมชั่น" [(ngModel)]="views.promotionsSelect" name = "promotionsType" (click)="update_promotion()">
+        <mat-option *ngFor="let promo of promotions" [value]="promo.detail">
+          {{promo.detail}}
+        </mat-option>
+      </mat-select>
+
+    </mat-form-field>
+
+  </div>
+
+
+
+  <div id="selectPeopleAndRoom">
+
+    โปรดเลือกจำนวนคน
+    <mat-form-field>
+
+      <textarea [(ngModel)]="views.numberofpeople" matInput placeholder="ระบุจำนวนคน"></textarea>
+
+    </mat-form-field>
+
+
+    โปรดเลือกจำนวนห้อง
+    <mat-form-field>
+
+      <textarea [(ngModel)]="views.numberofroom" matInput placeholder="ระบุจำนวนห้อง"></textarea>
+
+    </mat-form-field>
+
+  </div>
+  <div id="selectDate">
+    <div id="checkin">
+
+      เลือกเวลาเช็คอิน
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="เดือน/วัน/ปี" [(ngModel)]="views.dateStart">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+
+    <div id="checkout">
+
+      เลือกเวลาเช็คเอาท์
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker2" placeholder="เดือน/วัน/ปี" [(ngModel)]="views.dateEnd">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker2></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+  </div>
+
+  <div id="button1">
+    <div class="button-row">
+      <button mat-raised-button color="primary" (click) = save() > จอง </button>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

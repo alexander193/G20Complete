@@ -1,0 +1,80 @@
+<img src='/Room.jpg' style='position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;'>
+<mat-toolbar >
+  <mat-toolbar-row class="navbar">
+    <h1 class="leftnavbar">G20 Booking</h1>
+    <span class="spacer"></span>
+    <button mat-button (click) ="next()">Hotel Detail</button>
+    <button mat-button class="active" >UpdateRoomStatus</button>
+    <button mat-button [routerLink]="['']">Logout</button>
+    <span class="spaceright"></span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<br>
+<div class="panelmaster" >
+  <div class="panel1" >
+    <form class="input" >
+      <mat-form-field class="inputIn">
+        <mat-placeholder class="placeholder">ประเภทห้องพัก</mat-placeholder>
+        <mat-select [(ngModel)] = "select.inputRoomType" [(value)] = "select.selectedRoomType" name = "roomType">
+          <mat-option *ngFor="let roomtypes of roomtype" [value]="roomtypes.roomType" >
+            {{roomtypes.roomType}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="inputIn">
+        <mat-placeholder class="placeholder">สถานะห้องพัก</mat-placeholder>
+        <mat-select [(ngModel)] = "select.inputRoomStatus" [(value)] = "select.selectedRoomStatus" name = "roomStatus" >
+          <mat-option *ngFor="let roomstatuses of roomstatus" [value]="roomstatuses.roomStatus">
+            {{roomstatuses.roomStatus}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="panel2">
+    <form class="input">
+      <mat-form-field class="inputIn" >
+        <input matInput [(ngModel)] = "select.inputRoomNumber" [(value)]="select.selectedRoomNumber" name = "roomNumber" [value]="select.inputRoomNumber">
+        <mat-placeholder class="placeholder">หมายเลขห้อง</mat-placeholder>
+      </mat-form-field>
+      <mat-form-field class="inputIn">
+        <input matInput [(ngModel)]="select.inputRoomPrice" name = "roomPrice" [(value)]="select.selectedRoomPrice" [value] = "select.inputRoomPrice">
+        <mat-placeholder class="placeholder">ราคา</mat-placeholder>
+      </mat-form-field>
+    </form>
+    <div class="button">
+      <button mat-button (click) = "edit()">Update</button>
+    </div>
+    <br>
+    <br>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.roomId}} </td>
+    </ng-container>
+    <ng-container matColumnDef="room_type">
+      <th mat-header-cell *matHeaderCellDef> ประเภทห้องพัก </th>
+      <td mat-cell *matCellDef="let element"> {{element.roomTypeEntity.roomType}} </td>
+    </ng-container>
+    <ng-container matColumnDef="room_no">
+      <th mat-header-cell *matHeaderCellDef> หมายเลขห้อง </th>
+      <td mat-cell *matCellDef="let element"> {{element.roomNumber}} </td>
+    </ng-container>
+    <ng-container matColumnDef="room_price">
+      <th mat-header-cell *matHeaderCellDef> ราคา (บาท) </th>
+      <td mat-cell *matCellDef="let element"> {{element.roomPrice}} </td>
+    </ng-container>
+    <ng-container matColumnDef="room_status">
+      <th mat-header-cell *matHeaderCellDef> สถานะห้องพัก </th>
+      <td mat-cell *matCellDef="let element"> {{element.roomStatusEntity.roomStatus}} </td>
+    </ng-container>
+    <ng-container matColumnDef="hotel">
+      <th mat-header-cell *matHeaderCellDef> โรงแรม </th>
+      <td mat-cell *matCellDef="let element"> {{element.hotel.hotelNameEng}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectRow(row)" ></tr>
+  </table>
+</div>
+
